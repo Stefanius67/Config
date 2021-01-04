@@ -103,7 +103,7 @@ abstract class AbstractConfig implements ConfigInterface
             $date = $default;
             if ($dt !== false) {
                 $aError = $dt->getLastErrors();
-                if ( $aError === false || $aError['error_count'] == 0) {
+                if ($aError === false || $aError['error_count'] == 0) {
                     $dt->setTime(0, 0);
                     $date = $dt->getTimestamp();
                 }
@@ -124,9 +124,9 @@ abstract class AbstractConfig implements ConfigInterface
         if (!is_int($date)) {
             $dt = \DateTime::createFromFormat($this->strDateTimeFormat, $date);
             $date = $default;
-            if ($date !== false) {
+            if ($dt !== false) {
                 $aError = $dt->getLastErrors();
-                if ( $aError === false || $aError['error_count'] == 0) {
+                if ($aError === false || $aError['error_count'] == 0) {
                     $date = $dt->getTimestamp();
                 }
             }

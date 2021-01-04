@@ -94,7 +94,7 @@ class INIConfig extends AbstractConfig
      */
     public function getBool(string $strPath, bool $bDefault = false) : bool
     {
-        $value = $this->getValue($strPath, $bDefault);
+        $value = (string) $this->getValue($strPath, $bDefault);
         if ($this->isTrue($value)) {
             return true;
         } else if ($this->isFalse($value)) {

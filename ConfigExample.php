@@ -31,8 +31,8 @@ echo '<li>Module_2.String_1: ' . $oCfg->getString('Module_2.String_1', 'Default 
 echo '<li>Module_2.String_2: ' . $oCfg->getString('Module_2.String_2', 'Default String') . '</li>' . PHP_EOL;
 echo '<li>Module_2.Int_1: ' . $oCfg->getString('Module_2.Int_1', 1) . '</li>' . PHP_EOL;
 echo '<li>Module_2.Int_2: ' . $oCfg->getString('Module_2.Int_2', 2) . '</li>' . PHP_EOL;
-echo '<li>Module_2.Bool_1: ' . ($oCfg->getString('Module_2.Bool_1') ? 'true' : 'false') . '</li>' . PHP_EOL;
-echo '<li>Module_2.Bool_Error: ' . ($oCfg->getString('Module_2.Bool_Error', true) ? 'true' : 'false') . '</li>' . PHP_EOL;
+echo '<li>Module_2.Bool_1: ' . ($oCfg->getBool('Module_2.Bool_1') ? 'true' : 'false') . '</li>' . PHP_EOL;
+echo '<li>Module_2.Bool_Error: ' . ($oCfg->getBool('Module_2.Bool_Error', true) ? 'true' : 'false') . '</li>' . PHP_EOL;
 echo '</ul>' . PHP_EOL;
 
 echo '</ul>' . PHP_EOL;
