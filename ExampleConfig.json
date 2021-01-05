@@ -20,8 +20,8 @@
 		"Third Element"
 	],
 	"AssocArray": {
-		"First" : "Element", 
-		"Second" : "Element", 
-		"Third" : "Element"
+		"First" : "Element 1", 
+		"Second" : "Element 2", 
+		"Third" : "Element 3"
 	}
 }

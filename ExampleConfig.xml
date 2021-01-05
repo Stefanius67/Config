@@ -1,0 +1,25 @@
+<config>
+	<BaseString_1>Base String Parameter</BaseString_1>
+	<Module_1>
+		<String_1>First string Parameter</String_1>
+		<String_2>Second string Parameter</String_2>
+		<Int_1>10</Int_1>
+		<Int_2>20</Int_2>
+		<Date_1>2021-01-12</Date_1>
+		<DateTime_1>2021-02-23 13:47</DateTime_1>
+	</Module_1>
+	<Module_2>
+		<String_1>Module2 string Parameter</String_1>
+		<Int_1>30</Int_1>
+		<Bool_1>off</Bool_1>
+		<Bool_Error>invalid</Bool_Error>
+	</Module_2>
+	<IndexedArray>First Element</IndexedArray>
+	<IndexedArray>Second Element</IndexedArray>
+	<IndexedArray>Third Element</IndexedArray>
+	<AssocArray>
+		<First>Element 1</First>
+		<Second>Element 2</Second>
+		<Third>Element 3</Third>
+	</AssocArray>
+</config>
