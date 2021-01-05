@@ -17,7 +17,7 @@ namespace SKien\Config;
  * @author Stefanius <s.kien@online.de>
  * @copyright MIT License - see the LICENSE file for details
  */
-class JSONConfig extends AbstractConfig
+class NullConfig extends AbstractConfig
 {
     /**
      * Allways retun the specified default value.

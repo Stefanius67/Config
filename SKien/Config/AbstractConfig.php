@@ -16,10 +16,21 @@ namespace SKien\Config;
  */
 abstract class AbstractConfig implements ConfigInterface
 {
+    /** @var array holding the config data    */
+    protected ?array $aConfig = null;
     /** @var string format for date parameters     */
     protected string $strDateFormat = 'Y-m-d';
     /** @var string format for datetime parameters     */
     protected string $strDateTimeFormat = 'Y-m-d H:i';
+    
+    /**
+     * The constructor expects an valid filename/path to the JSON file.
+     * @param string $strConfigFile
+     */
+    public function __construct(string $strConfigFile)
+    {
+        $this->aConfig = $this->parseFile($strConfigFile);
+    }
     
     /**
      * Set the format for date parameters.
@@ -43,6 +54,36 @@ abstract class AbstractConfig implements ConfigInterface
     public function setDateTimeFormat(string $strFormat) : void
     {
         $this->strDateTimeFormat = $strFormat;
+    }
+    
+    /**
+     * Get the value specified by path.
+     * @param string $strPath
+     * @param mixed $default
+     * @return mixed
+     */
+    public function getValue(string $strPath, $default = null)
+    {
+        if ($this->aConfig === null) {
+            // without valid config file just return the default value
+            return $default;
+        }
+        $aPath = $this->splitPath($strPath);
+        $iDepth = count($aPath);
+        $value = null;
+        $aValues = $this->aConfig;
+        for ($i = 0; $i < $iDepth; $i++) {
+            if (!is_array($aValues)) {
+                $value = null;
+                break;
+            }
+            $value = $aValues[$aPath[$i]] ?? null;
+            if ($value === null) {
+                break;
+            }
+            $aValues = $value;
+        }
+        return $value ?? $default;
     }
     
     /**
@@ -144,6 +185,16 @@ abstract class AbstractConfig implements ConfigInterface
     {
         $value = $this->getValue($strPath, $aDefault);
         return is_array($value) ? $value : $aDefault;
+    }
+    
+    /**
+     * Split the given path in its components.
+     * @param string $strPath
+     * @return array
+     */
+    protected function splitPath(string $strPath) : array
+    {
+        return explode('.', $strPath);
     }
     
     /**
