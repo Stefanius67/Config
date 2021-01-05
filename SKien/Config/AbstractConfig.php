@@ -9,7 +9,7 @@ namespace SKien\Config;
  * #### History
  * - *2021-01-01*   initial version
  *
- * @package SKien/GCalendar
+ * @package SKien/Config
  * @version 1.0.0
  * @author Stefanius <s.kien@online.de>
  * @copyright MIT License - see the LICENSE file for details
@@ -22,15 +22,6 @@ abstract class AbstractConfig implements ConfigInterface
     protected string $strDateFormat = 'Y-m-d';
     /** @var string format for datetime parameters     */
     protected string $strDateTimeFormat = 'Y-m-d H:i';
-    
-    /**
-     * The constructor expects an valid filename/path to the JSON file.
-     * @param string $strConfigFile
-     */
-    public function __construct(string $strConfigFile)
-    {
-        $this->aConfig = $this->parseFile($strConfigFile);
-    }
     
     /**
      * Set the format for date parameters.
@@ -127,7 +118,11 @@ abstract class AbstractConfig implements ConfigInterface
      */
     public function getBool(string $strPath, bool $bDefault = false) : bool
     {
-        return (bool) $this->getValue($strPath, $bDefault);
+        $value = $this->getValue($strPath, $bDefault);
+        if (!is_bool($value)) {
+            $value = $this->boolFromString((string) $value, $bDefault);
+        }
+        return $value;
     }
     
     /**
@@ -138,8 +133,8 @@ abstract class AbstractConfig implements ConfigInterface
      */
     public function getDate(string $strPath, $default = 0) : int
     {
-        $date = $this->getValue($strPath, $default);
-        if (!is_int($date)) {
+        $date = (string) $this->getValue($strPath, $default);
+        if (!ctype_digit($date)) {
             $dt = \DateTime::createFromFormat($this->strDateFormat, $date);
             $date = $default;
             if ($dt !== false) {
@@ -149,6 +144,8 @@ abstract class AbstractConfig implements ConfigInterface
                     $date = $dt->getTimestamp();
                 }
             }
+        } else {
+            $date = intval($date);
         }
         return $date;
     }
@@ -161,8 +158,8 @@ abstract class AbstractConfig implements ConfigInterface
      */
     public function getDateTime(string $strPath, $default = 0) : int
     {
-        $date = $this->getValue($strPath, $default);
-        if (!is_int($date)) {
+        $date = (string) $this->getValue($strPath, $default);
+        if (!ctype_digit($date)) {
             $dt = \DateTime::createFromFormat($this->strDateTimeFormat, $date);
             $date = $default;
             if ($dt !== false) {
@@ -171,6 +168,8 @@ abstract class AbstractConfig implements ConfigInterface
                     $date = $dt->getTimestamp();
                 }
             }
+        } else {
+            $date = intval($date);
         }
         return $date;
     }
@@ -188,17 +187,6 @@ abstract class AbstractConfig implements ConfigInterface
     }
     
     /**
-     * Parse the given file an add all settings to the internal configuration.
-     * Method MUST be implemented in derived classes!
-     * @param string $strConfigFile
-     */
-    protected function parseFile(string $strConfigFile) : array
-    {
-        trigger_error('parseFile() MUST be implemented in class ' . get_class($this) . '!', E_USER_ERROR);
-        return [];
-    }
-    
-    /**
      * Split the given path in its components.
      * @param string $strPath
      * @return array
@@ -206,6 +194,27 @@ abstract class AbstractConfig implements ConfigInterface
     protected function splitPath(string $strPath) : array
     {
         return explode('.', $strPath);
+    }
+    
+    /**
+     * Convert string to bool.
+     * Accepted values are (case insensitiv): <ul>
+     * <li> true, on, yes, 1 </li>
+     * <li> false, off, no, none, 0 </li></ul>
+     * for all other values the default value is returned!
+     * @param string $strValue
+     * @param bool $bDefault
+     * @return bool
+     */
+    protected function boolFromString(string $strValue, bool $bDefault = false) : bool
+    {
+        if ($this->isTrue($strValue)) {
+            return true;
+        } else if ($this->isFalse($strValue)) {
+            return false;
+        } else {
+            return $bDefault;
+        }
     }
     
     /**

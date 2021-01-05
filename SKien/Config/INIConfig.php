@@ -20,25 +20,12 @@ namespace SKien\Config;
 class INIConfig extends AbstractConfig
 {
     /**
-     * Get the boolean value specified by path.
-     * Accepted values are (case insensitiv): <ul>
-     * <li> true, on, yes, 1 </li>
-     * <li> false, off, no, none, 0 </li></ul>
-     * for all other values the default is returned!
-     * @param string $strPath
-     * @param bool $bDefault
-     * @return bool
+     * The constructor expects an valid filename/path to the JSON file.
+     * @param string $strConfigFile
      */
-    public function getBool(string $strPath, bool $bDefault = false) : bool
+    public function __construct(string $strConfigFile)
     {
-        $value = (string) $this->getValue($strPath, $bDefault);
-        if ($this->isTrue($value)) {
-            return true;
-        } else if ($this->isFalse($value)) {
-            return false;
-        } else {
-            return $bDefault;
-        }
+        $this->aConfig = $this->parseFile($strConfigFile);
     }
     
     /**
@@ -49,12 +36,8 @@ class INIConfig extends AbstractConfig
     {
         if (!file_exists($strConfigFile)) {
             trigger_error('Config File (' . $strConfigFile . ') does not exist!', E_USER_WARNING);
-            return [];
         }
         $aINI = parse_ini_file($strConfigFile, TRUE);
-        if ($aINI === false) {
-            $aINI = [];
-        }
         return $aINI;
     }
 }

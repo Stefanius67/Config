@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    verbose="true"
+    colors="true"
+	bootstrap ="autoloader.php">
+    <testsuites>
+        <testsuite name="Config">
+            <directory>SKien/Test/Config</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">SKien/Config</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
+        <log type="coverage-html" target="SKien/Test/Config/coverage"/>
+        <log type="coverage-clover" target="SKien/Test/Config/coverage/clover.xml"/>
+    </logging>
+</phpunit>

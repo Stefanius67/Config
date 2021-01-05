@@ -2,14 +2,14 @@
 
 require_once 'autoloader.php';
 
-// use SKien\Config\JSONConfig;
-// $oCfg = new JSONConfig('ExampleConfig.json');
+use SKien\Config\JSONConfig;
+$oCfg = new JSONConfig('ExampleConfig.json');
 
 // use SKien\Config\INIConfig;
 // $oCfg = new INIConfig('ExampleConfig.ini');
 
-use SKien\Config\XMLConfig;
-$oCfg = new XMLConfig('ExampleConfig.xml');
+// use SKien\Config\XMLConfig;
+// $oCfg = new XMLConfig('ExampleConfig.xml');
 
 echo '<h1>Base Entries</h1>' . PHP_EOL;
 echo '<ul>' . PHP_EOL;

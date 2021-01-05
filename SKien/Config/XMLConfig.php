@@ -9,7 +9,7 @@ namespace SKien\Config;
  * #### History
  * - *2021-01-01*   initial version
  *
- * @package SKien/GCalendar
+ * @package SKien/Config
  * @version 1.0.0
  * @author Stefanius <s.kien@online.de>
  * @copyright MIT License - see the LICENSE file for details
@@ -17,25 +17,12 @@ namespace SKien\Config;
 class XMLConfig extends AbstractConfig
 {
     /**
-     * Get the boolean value specified by path.
-     * Accepted values are (case insensitiv): <ul>
-     * <li> true, on, yes, 1 </li>
-     * <li> false, off, no, none, 0 </li></ul>
-     * for all other values the default is returned!
-     * @param string $strPath
-     * @param bool $bDefault
-     * @return bool
+     * The constructor expects an valid filename/path to the JSON file.
+     * @param string $strConfigFile
      */
-    public function getBool(string $strPath, bool $bDefault = false) : bool
+    public function __construct(string $strConfigFile)
     {
-        $value = (string) $this->getValue($strPath, $bDefault);
-        if ($this->isTrue($value)) {
-            return true;
-        } else if ($this->isFalse($value)) {
-            return false;
-        } else {
-            return $bDefault;
-        }
+        $this->aConfig = $this->parseFile($strConfigFile);
     }
     
     /**
@@ -46,14 +33,16 @@ class XMLConfig extends AbstractConfig
     {
         if (!file_exists($strConfigFile)) {
             trigger_error('Config File (' . $strConfigFile . ') does not exist!', E_USER_WARNING);
-            return [];
         }
         
-        $aXML = [];
         // first read XML data into stdclass object using the SimpleXML
         // to convert this object into associative array by encode it as JSON string and
         // decode it with the $assoc parameter set to true...
-        $oXML = new \SimpleXMLElement($strConfigFile, 0, true);
+        try {
+            $oXML = new \SimpleXMLElement($strConfigFile, 0, true);
+        } catch (\Exception $e) {
+            trigger_error('Invalid config file (' . $strConfigFile . '): ' . $e->getMessage(), E_USER_ERROR);
+        }
         $strJSON = json_encode($oXML);
         $aXML = json_decode($strJSON, true);
         

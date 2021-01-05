@@ -1,0 +1,45 @@
+<config>
+	<BaseString_1>Base String Parameter</BaseString_1>
+	<Module_1>
+		<String_1>First string Parameter</String_1>
+		<String_2>Second string Parameter</String_2>
+		<Int_1>10</Int_1>
+		<Int_2>20</Int_2>
+		<Float_1>12.34</Float_1>
+		<Date_1>2021-01-12</Date_1>
+		<Date_2>1613775600</Date_2>
+		<Date_3>14.03.2012</Date_3>
+		<Date_Invalid>2021-0112</Date_Invalid>
+		<DateTime_1>2021-01-12 13:47</DateTime_1>
+		<DateTime_2>1613796813</DateTime_2>
+		<DateTime_3>14.03.2012  13:47</DateTime_3>
+		<DateTime_Invalid>2021-0112 345</DateTime_Invalid>
+	</Module_1>
+	<Module_2>
+		<True_1>true</True_1>
+		<True_2>TRUE</True_2>
+		<True_3>on</True_3>
+		<True_4>On</True_4>
+		<True_5>yes</True_5>
+		<True_6>Yes</True_6>
+		<True_7>YES</True_7>
+		<True_8>1</True_8>
+		<False_1>false</False_1>
+		<False_2>False</False_2>
+		<False_3>off</False_3>
+		<False_4>OFF</False_4>
+		<False_5>no</False_5>
+		<False_6>No</False_6>
+		<False_7>none</False_7>
+		<False_8>0</False_8>
+		<Bool_Invalid>invalid</Bool_Invalid>
+	</Module_2>
+	<IndexedArray>First Element</IndexedArray>
+	<IndexedArray>Second Element</IndexedArray>
+	<IndexedArray>Third Element</IndexedArray>
+	<AssocArray>
+		<First>Element 1</First>
+		<Second>Element 2</Second>
+		<Third>Element 3</Third>
+	</AssocArray>
+</config>

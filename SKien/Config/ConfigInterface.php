@@ -9,7 +9,7 @@ namespace SKien\Config;
  * #### History
  * - *2021-01-01*   initial version
  * 
- * @package SKien/GCalendar
+ * @package SKien/Config
  * @version 1.0.0
  * @author Stefanius <s.kien@online.de>
  * @copyright MIT License - see the LICENSE file for details

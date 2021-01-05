@@ -11,7 +11,7 @@
 	"Module_2": {
 		"String_1": "Module2 string Parameter",
 		"Int_1": 30,
-		"Bool_1": true,
+		"Bool_1": "FALSE",
 		"Bool_Error": "invalid"
 	},
 	"IndexedArray": [
