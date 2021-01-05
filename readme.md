@@ -1,42 +1,29 @@
-# Create 'Add to my google calendar' Link to your Homepage
+# Read configuration files of different formats (INI, JSON, XML,...)
 
  ![Latest Stable Version](https://img.shields.io/badge/release-v1.0.0-brightgreen.svg)
  ![License](https://img.shields.io/packagist/l/gomoob/php-pushwoosh.svg) 
  [![Donate](https://img.shields.io/static/v1?label=donate&message=PayPal&color=orange)](https://www.paypal.me/SKientzler/5.00EUR)
  ![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)
- [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Stefanius67/GCalendar/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/Stefanius67/GCalendar/?branch=main)
+ [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Stefanius67/Config/badges/quality-score.png?b=main&s=83ec79d99dfd102d2a89d33c72fa55cd93536063)](https://scrutinizer-ci.com/g/Stefanius67/Config/?branch=main)
  
 ----------
 ## Overview
 
-This class can generate the HREF value to provide a `Add to my google calendar` link to your
-page.
+This package provides a general interface via which configuration settings can be 
+read from different sources / formats.
+Following Formats are supported so far:
 
-Following Data for the event to create is supported:
-
-- Subject
-	- `setSubject()`  
-- Start Date/Time
-	- `setStart()`  
-- End Date/Time or Duration(if not set, default duration of 30 min is used)
-	- `setEnd()` or `setDuration()`  
-- Timezone (if not set, system settings used)
-	- `setTimezone()`  
-- All day Event
-	- `setTimezone()`  
-- Detailed Description (optional)
-	- `setDetails()`  
-- Location
-	- `setLocation()`  
-- Additional Guest(s)
-	- `addGuest()`  
+- JSON
+- INI
+	- flat INI file like 'usual' windwos INI-Files supporting sections and entries
+- XML
 
 ## Usage
-1. Create an instance of the GCalAddEventLink class
-2. Set the required information for the event to be generated
-3. Pass the generated HREF to an <a> element on your page
+1. Create an instance of the class that supports the desired format.
+2. Pass this instance to any module that supports the `ConfigInterface`
+3. inside the module get the needed config settings with `the getXXX($strPath, $default)` - Methods
 
-See AddEventExample.php
+See ConfigExample.php
 
 ## Logging
 This package can use any PSR-3 compliant logger. The logger is initialized with a NullLogger-object 
@@ -55,5 +42,5 @@ as an introduction to this topic.
 
 
 ## History
-##### 2020-12-15	Version 1.00
+##### 2021-01-05	Version 1.00
   * initial Version

@@ -10,5 +10,5 @@ parameters:
 	level: 6
 	checkMissingIterableValueType: false
 	paths:
-		- SKien/GCalendar
+		- SKien/Config
 		- Psr

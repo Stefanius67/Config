@@ -38,7 +38,7 @@ class INIConfig extends AbstractConfig
         $strSection = null;
         $aLines = file($strConfigFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($aLines as $strLine) {
-            $strLine = $this->stripComment($strLine);
+            $strLine = $this->skipComment($strLine);
             if (strlen($strLine) === 0) {
                 continue;
             }
@@ -116,12 +116,12 @@ class INIConfig extends AbstractConfig
     }
     
     /**
-     * Strip comment starting with first ';' from the line.
+     * Skip all from the first ';' as comment.
      * ';' inside of single/double quot belongs to the value and do not mark a comment!
      * @param string $strLine
      * @return string
      */
-    protected function stripComment(string $strLine) : string
+    protected function skipComment(string $strLine) : string
     {
         $strLine = trim($strLine);
         if (substr($strLine, 0, 1) == ';') {
@@ -130,6 +130,10 @@ class INIConfig extends AbstractConfig
         if (strpos($strLine, ';') === false) {
             return $strLine;
         }
+        // Since both single and double quotes are supported, it is a bit complicated to solve 
+        // this with a RegEx (... and unfortunately I am not really a specialist in RegEx)
+        // Therefore following is simply coded 'pure' to find first semikolon ouside of quotes
+        // to skip the rest as comment
         $iLen = strlen($strLine);
         $bInDblQuote = false;
         $bInSingleQuote = false;
