@@ -18,6 +18,9 @@ Following Formats are supported so far:
 	- flat INI file like 'usual' windwos INI-Files supporting sections and entries
 - XML
 
+A `NullConfig` class is also included that can be used for tesing and if it is
+desired to use a module working completly with default values for the configuration.
+
 ## Usage
 1. Create an instance of the class that supports the desired format.
 2. Pass this instance to any module that supports the `ConfigInterface`
