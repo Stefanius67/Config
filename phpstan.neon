@@ -11,4 +11,3 @@ parameters:
 	checkMissingIterableValueType: false
 	paths:
 		- SKien/Config
-		- Psr

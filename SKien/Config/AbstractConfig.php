@@ -112,7 +112,7 @@ abstract class AbstractConfig implements ConfigInterface
      * Get the integer value specified by path.
      * @param string $strPath
      * @param float $fltDefault
-     * @return int
+     * @return float
      */
     public function getFloat(string $strPath, float $fltDefault = 0.0) : float
     {
@@ -144,7 +144,7 @@ abstract class AbstractConfig implements ConfigInterface
             $date = $default;
             if ($dt !== false) {
                 $aError = $dt->getLastErrors();
-                if ($aError === false || $aError['error_count'] == 0) {
+                if ($aError['error_count'] == 0) {
                     $dt->setTime(0, 0);
                     $date = $dt->getTimestamp();
                 }
@@ -167,7 +167,7 @@ abstract class AbstractConfig implements ConfigInterface
             $date = $default;
             if ($dt !== false) {
                 $aError = $dt->getLastErrors();
-                if ($aError === false || $aError['error_count'] == 0) {
+                if ($aError['error_count'] == 0) {
                     $date = $dt->getTimestamp();
                 }
             }
@@ -185,6 +185,17 @@ abstract class AbstractConfig implements ConfigInterface
     {
         $value = $this->getValue($strPath, $aDefault);
         return is_array($value) ? $value : $aDefault;
+    }
+    
+    /**
+     * Parse the given file an add all settings to the internal configuration.
+     * Method MUST be implemented in derived classes!
+     * @param string $strConfigFile
+     */
+    protected function parseFile(string $strConfigFile) : array
+    {
+        trigger_error('parseFile() MUST be implemented in class ' . get_class($this) . '!', E_USER_ERROR);
+        return [];
     }
     
     /**

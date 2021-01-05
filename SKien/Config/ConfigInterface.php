@@ -44,7 +44,7 @@ interface ConfigInterface
      * Get the integer value specified by path.
      * @param string $strPath
      * @param float $fltDefault
-     * @return int
+     * @return float
      */
     public function getFloat(string $strPath, float $fltDefault = 0.0) : float;
     
