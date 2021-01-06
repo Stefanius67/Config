@@ -40,11 +40,11 @@ class XMLConfig extends AbstractConfig
         // decode it with the $assoc parameter set to true...
         try {
             $oXML = new \SimpleXMLElement($strConfigFile, 0, true);
+            $strJSON = json_encode($oXML);
+            $aXML = json_decode($strJSON, true);
         } catch (\Exception $e) {
             trigger_error('Invalid config file (' . $strConfigFile . '): ' . $e->getMessage(), E_USER_ERROR);
         }
-        $strJSON = json_encode($oXML);
-        $aXML = json_decode($strJSON, true);
         
         return $aXML;
     }
