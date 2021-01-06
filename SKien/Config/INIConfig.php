@@ -38,6 +38,6 @@ class INIConfig extends AbstractConfig
             trigger_error('Config File (' . $strConfigFile . ') does not exist!', E_USER_WARNING);
         }
         $aINI = parse_ini_file($strConfigFile, TRUE);
-        return $aINI;
+        return ($aINI !== false) ? $aINI : [];
     }
 }
