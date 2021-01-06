@@ -37,7 +37,7 @@ class ArrayConfig extends AbstractConfig
      */
     public function addConfig(array $aConfig) : void
     {
-        $this->aConfig = array_merge($this->aConfig, $aConfig);
+        $this->aConfig = ($this->aConfig ? array_merge($this->aConfig, $aConfig) : $aConfig);
     }
     
     /**
@@ -47,6 +47,7 @@ class ArrayConfig extends AbstractConfig
      */
     public function setValue(string $strName, $value) : void
     {
+        $this->aConfig ?: $this->aConfig = [];
         $this->aConfig[$strName] = $value;
     }
 }
