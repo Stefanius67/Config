@@ -38,6 +38,7 @@ class XMLConfig extends AbstractConfig
         // first read XML data into stdclass object using the SimpleXML
         // to convert this object into associative array by encode it as JSON string and
         // decode it with the $assoc parameter set to true...
+        $aXML = [];
         try {
             $oXML = new \SimpleXMLElement($strConfigFile, 0, true);
             $strJSON = json_encode($oXML);
