@@ -1,0 +1,15 @@
+{
+	"BaseString_1": "Base String 1 - Config 1",
+	"BaseString_2": "Base String 2 - Config 1",
+	"Module_1": {
+		"String_1": "First string - Config 1",
+		"String_2": "Second string - Config 1",
+		"String_3": "Third string - Config 1"
+	},
+	"IndexedArray": [
+		"First Element - Config 1", 
+		"Second Element - Config 1", 
+		"Third Element - Config 1"
+	],
+	"EmptyIndexArray": []
+}

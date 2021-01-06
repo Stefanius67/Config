@@ -42,5 +42,42 @@ class JSONConfigTest extends AbstractConfigTest
         
         return $cfg;
     }
+    
+    public function test_mergeWith() : void
+    {
+        $cfg1 = new JSONConfig(dirname(__FILE__) . '/testdata/MergeExample1.json');
+        $cfg2 = new JSONConfig(dirname(__FILE__) . '/testdata/MergeExample2.json');
+        
+        $this->assertEquals('First string - Config 1', $cfg1->getString('Module_1.String_1'));
+        $this->assertEquals('Second string - Config 1', $cfg1->getString('Module_1.String_2'));
+        $this->assertEquals('Third string - Config 1', $cfg1->getString('Module_1.String_3'));
+        $this->assertEquals('default', $cfg1->getString('Module_1.String_4', 'default'));
+        $this->assertEquals('default', $cfg1->getString('Module_1.String_5', 'default'));
+        
+        $cfg1->mergeWith($cfg2);
+        
+        $this->assertEquals('First string - Config 1', $cfg1->getString('Module_1.String_1'));
+        $this->assertEquals('Second string - Config 1', $cfg1->getString('Module_1.String_2'));
+        $this->assertEquals('Third string - Config 2', $cfg1->getString('Module_1.String_3'));
+        $this->assertEquals('Fourth string - Config 2', $cfg1->getString('Module_1.String_4', 'default'));
+        $this->assertEquals('Fifth string - Config 2', $cfg1->getString('Module_1.String_5', 'default'));
+    }
+    
+    public function test_mergeWithEmpty() : void
+    {
+        $cfg1 = new JSONConfig(dirname(__FILE__) . '/testdata/MergeExample1.json');
+        $cfg2 = new JSONConfig(dirname(__FILE__) . '/testdata/MergeExample2.json');
+        
+        // create reflection object to manipulate protected property
+        $reflectionObject = new \ReflectionObject($cfg1);
+        
+        $reflectionConfig = $reflectionObject->getProperty('aConfig');
+        $reflectionConfig->setAccessible(true);
+        $reflectionConfig->setValue($cfg1, null);
+        $this->assertEquals('default', $cfg1->getString('BaseString_1', 'default'));
+        
+        $cfg1->mergeWith($cfg2);
+        $this->assertEquals('Base String 2 - Config 2', $cfg1->getString('BaseString_2'));
+    }
 }
 
