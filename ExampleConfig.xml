@@ -1,3 +1,4 @@
+<!-- the name of the root element can be chosen arbitrarily ... -->
 <config>
 	<BaseString_1>Base String Parameter</BaseString_1>
 	<Module_1>
@@ -15,6 +16,7 @@
 		<Bool_1>off</Bool_1>
 		<Bool_Error>invalid</Bool_Error>
 	</Module_2>
+	<!-- to define an zero base indexed array insert multiple elements with the same name... -->
 	<IndexedArray>First Element</IndexedArray>
 	<IndexedArray>Second Element</IndexedArray>
 	<IndexedArray>Third Element</IndexedArray>
