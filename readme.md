@@ -9,17 +9,27 @@
 ----------
 ## Overview
 
-This package provides a general interface via which configuration settings can be 
-read from different sources / formats.
-Following Formats are supported so far:
+This package provides a general interface that grant access to configuration settings 
+of different sources and/or formats.
+
+#### Following Formats are supported so far:
 
 - JSON
-- INI
-	- flat INI file like 'usual' windwos INI-Files supporting sections and entries
+- INI (flat INI file like 'usual' windwos INI-Files supporting sections and entries)
 - XML
+- directly from an Array (content may result from a DB query)
 
-A `NullConfig` class is also included that can be used for tesing and if it is
-desired to use a module working completly with default values for the configuration.
+In addition, the package offers the possibility of merging several configurations 
+from different sources and / or in different formats into one object, which can then 
+be used by any module.
+
+There is thus the possibility of e.g. Merge global and local or general and 
+user-specific configurations without the processing module having to know where what 
+information comes from.
+
+A `NullConfig` class is also included that can be used for testing. Also this class 
+can be used if it is desired to make a module working completly independent with 
+default configuration values and optional can have external configuration be passed.
 
 ## Usage
 1. Create an instance of the class that supports the desired format.
@@ -28,20 +38,7 @@ desired to use a module working completly with default values for the configurat
 
 See ConfigExample.php
 
-## Logging
-This package can use any PSR-3 compliant logger. The logger is initialized with a NullLogger-object 
-by default. The logger of your choice have to be passed to the constructor of the GCalAddEventLink class. 
-
-If you are not working with a PSR-3 compatible logger so far, this is a good opportunity 
-to deal with this recommendation and may work with it in the future.  
-
-There are several more or less extensive PSR-3 packages available on the Internet.  
-
-You can also take a look at the 
- [**'XLogger'**](https://www.phpclasses.org/package/11743-PHP-Log-events-to-browser-console-text-and-XML-files.html)
-package and the associated blog
- [**'PSR-3 logging in a PHP application'**](https://www.phpclasses.org/blog/package/11743/post/1-PSR3-logging-in-a-PHP-application.html)
-as an introduction to this topic.
+For the format of the configuration files see the seeral examples comming with this package.
 
 
 ## History

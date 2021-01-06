@@ -1,16 +1,136 @@
+<html>
+<head>
+<style>
+.config1
+{
+    color: red;
+    font-weight: bold;
+}
+.config2
+{
+    color: blue;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
 <?php
 
 require_once 'autoloader.php';
 
 use SKien\Config\JSONConfig;
-$oCfg = new JSONConfig('ExampleConfig.json');
+$oCfg1 = new JSONConfig('MergeExample1.json');
+
+echo '<h1>Config 1</h1>' . PHP_EOL;
+echo '<h2>Base Entries</h2>' . PHP_EOL;
+echo '<ul>' . PHP_EOL;
+echo '<li>BaseString_1: ' . $oCfg1->getString('BaseString_1', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>BaseString_2: ' . $oCfg1->getString('BaseString_2', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>BaseString_3: ' . $oCfg1->getString('BaseString_3', 'Default String') . '</li>' . PHP_EOL;
+echo '</ul>' . PHP_EOL;
+echo '<h2>Module 1</h2>' . PHP_EOL;
+echo '<ul>' . PHP_EOL;
+echo '<li>Module_1.String_1: ' . $oCfg1->getString('Module_1.String_1', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_2: ' . $oCfg1->getString('Module_1.String_2', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_3: ' . $oCfg1->getString('Module_1.String_3', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_4: ' . $oCfg1->getString('Module_1.String_4', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_5: ' . $oCfg1->getString('Module_1.String_5', 'Default String') . '</li>' . PHP_EOL;
+echo '</ul>' . PHP_EOL;
+echo '<h2>Indexed Array:</h2>' . PHP_EOL;
+$aEntry = $oCfg1->getArray('IndexedArray');
+$i = 0;
+echo '<ul>' . PHP_EOL;
+foreach ($aEntry as $value) {
+    echo '<li>Value[' . $i++ . ']: ' . $value . '</li>' . PHP_EOL;
+}
+echo '</ul>' . PHP_EOL;
+
+$oCfg2 = new JSONConfig('MergeExample2.json');
+
+echo '<h1>Config 2</h1>' . PHP_EOL;
+echo '<h2>Base Entries</h2>' . PHP_EOL;
+echo '<ul>' . PHP_EOL;
+echo '<li>BaseString_1: ' . $oCfg2->getString('BaseString_1', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>BaseString_2: ' . $oCfg2->getString('BaseString_2', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>BaseString_3: ' . $oCfg2->getString('BaseString_3', 'Default String') . '</li>' . PHP_EOL;
+echo '</ul>' . PHP_EOL;
+echo '<h2>Module 1</h2>' . PHP_EOL;
+echo '<ul>' . PHP_EOL;
+echo '<li>Module_1.String_1: ' . $oCfg2->getString('Module_1.String_1', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_2: ' . $oCfg2->getString('Module_1.String_2', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_3: ' . $oCfg2->getString('Module_1.String_3', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_4: ' . $oCfg2->getString('Module_1.String_4', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_5: ' . $oCfg2->getString('Module_1.String_5', 'Default String') . '</li>' . PHP_EOL;
+echo '</ul>' . PHP_EOL;
+echo '<h2>Indexed Array:</h2>' . PHP_EOL;
+$aEntry = $oCfg2->getArray('IndexedArray');
+$i = 0;
+echo '<ul>' . PHP_EOL;
+foreach ($aEntry as $value) {
+    echo '<li>Value[' . $i++ . ']: ' . $value . '</li>' . PHP_EOL;
+}
+echo '</ul>' . PHP_EOL;
+
+$oCfg3 = clone $oCfg1;
+$oCfg3->mergeWith($oCfg2);
+
+echo '<h1>Config 1 merged with Config 2</h1>' . PHP_EOL;
+echo '<h2>Base Entries</h2>' . PHP_EOL;
+echo '<ul>' . PHP_EOL;
+echo '<li>BaseString_1: ' . $oCfg3->getString('BaseString_1', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>BaseString_2: ' . $oCfg3->getString('BaseString_2', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>BaseString_3: ' . $oCfg3->getString('BaseString_3', 'Default String') . '</li>' . PHP_EOL;
+echo '</ul>' . PHP_EOL;
+echo '<h2>Module 1</h2>' . PHP_EOL;
+echo '<ul>' . PHP_EOL;
+echo '<li>Module_1.String_1: ' . $oCfg3->getString('Module_1.String_1', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_2: ' . $oCfg3->getString('Module_1.String_2', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_3: ' . $oCfg3->getString('Module_1.String_3', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_4: ' . $oCfg3->getString('Module_1.String_4', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_5: ' . $oCfg3->getString('Module_1.String_5', 'Default String') . '</li>' . PHP_EOL;
+echo '</ul>' . PHP_EOL;
+echo '<h2>Indexed Array:</h2>' . PHP_EOL;
+$aEntry = $oCfg3->getArray('IndexedArray');
+$i = 0;
+echo '<ul>' . PHP_EOL;
+foreach ($aEntry as $value) {
+    echo '<li>Value[' . $i++ . ']: ' . $value . '</li>' . PHP_EOL;
+}
+echo '</ul>' . PHP_EOL;
+
+$oCfg3 = clone $oCfg2;
+$oCfg3->mergeWith($oCfg1);
+
+echo '<h1>Config 2 merged with Config 1</h1>' . PHP_EOL;
+echo '<h2>Base Entries</h2>' . PHP_EOL;
+echo '<ul>' . PHP_EOL;
+echo '<li>BaseString_1: ' . $oCfg3->getString('BaseString_1', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>BaseString_2: ' . $oCfg3->getString('BaseString_2', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>BaseString_3: ' . $oCfg3->getString('BaseString_3', 'Default String') . '</li>' . PHP_EOL;
+echo '</ul>' . PHP_EOL;
+echo '<h2>Module 1</h2>' . PHP_EOL;
+echo '<ul>' . PHP_EOL;
+echo '<li>Module_1.String_1: ' . $oCfg3->getString('Module_1.String_1', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_2: ' . $oCfg3->getString('Module_1.String_2', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_3: ' . $oCfg3->getString('Module_1.String_3', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_4: ' . $oCfg3->getString('Module_1.String_4', 'Default String') . '</li>' . PHP_EOL;
+echo '<li>Module_1.String_5: ' . $oCfg3->getString('Module_1.String_5', 'Default String') . '</li>' . PHP_EOL;
+echo '</ul>' . PHP_EOL;
+echo '<h2>Indexed Array:</h2>' . PHP_EOL;
+$aEntry = $oCfg3->getArray('IndexedArray');
+$i = 0;
+echo '<ul>' . PHP_EOL;
+foreach ($aEntry as $value) {
+    echo '<li>Value[' . $i++ . ']: ' . $value . '</li>' . PHP_EOL;
+}
+echo '</ul>' . PHP_EOL;
 
 // use SKien\Config\INIConfig;
 // $oCfg = new INIConfig('ExampleConfig.ini');
 
 // use SKien\Config\XMLConfig;
 // $oCfg = new XMLConfig('ExampleConfig.xml');
-
+/*
 echo '<h1>Base Entries</h1>' . PHP_EOL;
 echo '<ul>' . PHP_EOL;
 echo '<li>' . $oCfg->getString('BaseString_1', 'Default String') . '</li>' . PHP_EOL;
@@ -70,3 +190,7 @@ foreach ($aEntry as $key => $value) {
 }
 echo '    </ul></li>' . PHP_EOL;
 echo '</ul>' . PHP_EOL;
+*/
+?>
+</body>
+</html>

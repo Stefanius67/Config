@@ -1,0 +1,14 @@
+{
+	"BaseString_1": "Base String 1 - <span class=config1>Config1</span>",
+	"BaseString_2": "Base String 2 - <span class=config1>Config1</span>",
+	"Module_1": {
+		"String_1": "First string - <span class=config1>Config 1</span>",
+		"String_2": "Second string - <span class=config1>Config 1</span>",
+		"String_3": "Third string - <span class=config1>Config 1</span>"
+	},
+	"IndexedArray": [
+		"First Element - <span class=config1>Config 1</span>", 
+		"Second Element - <span class=config1>Config 1</span>", 
+		"Third Element - <span class=config1>Config 1</span>"
+	]
+}

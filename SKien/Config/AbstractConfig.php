@@ -187,6 +187,15 @@ abstract class AbstractConfig implements ConfigInterface
     }
     
     /**
+     * Returns the internal array.
+     * @return array
+     */
+    public function getConfig() : array
+    {
+        return $this->aConfig ?? [];
+    }
+    
+    /**
      * Split the given path in its components.
      * @param string $strPath
      * @return array
@@ -239,5 +248,81 @@ abstract class AbstractConfig implements ConfigInterface
     {
         $strValue = strtolower($strValue);
         return in_array($strValue, ['false', 'off', 'no', 'none', '0']);
+    }
+    
+    /**
+     * Merge this instance with values from onather config.
+     * Note that the elemenst of the config to merge with has allways higher priority than 
+     * the elements of this instance. <br/>
+     * If both config contains elements with the same key, the value of this instance will be
+     * replaced with the value of the config we merge with. <br/>
+     * <b>So keep allways the order in wich you merge several configs together in mind.</b>
+     * @param AbstractConfig $oMerge
+     */
+    public function mergeWith(AbstractConfig $oMerge) : void
+    {
+        $aMerge = $oMerge->getConfig();
+        if ($this->aConfig === null) {
+            $this->aConfig = $aMerge;
+            return;
+        }
+        $this->aConfig = $this->mergeArrays($this->aConfig, $aMerge);
+    }
+    
+    /**
+     * Merge the values of two array into one resulting array.
+     * <b>Note: <i>neither array_merge() nor array_merge_recursive() lead to 
+     * the desired result</i></b><br/><br/>
+     * Assuming following two config:<pre>
+     *      $a1 = ["a" => ["c1" => "red", "c2" => "green"]];
+     *      $a2 = ["a" => ["c2" => "blue", "c3" => "yellow"]]; </pre>
+     * We expect as result for merge($a1, $a2): <pre>
+     *      $a3 = ["a" => ["c1" => "red", "c2" => "blue", "c3" => "yellow"]]; </pre>
+     * => [a][c1] remains on "red", [a][c2] "green" is replaced by "blue" and [a][c3] is supplemented with "yellow" <br/><br/>
+     * But <ol>
+     * <li><b>$a3 = array_merge($a1, $a2)</b> will result in: <pre>
+     *      $a3 = ["a" => ["c2" => "blue", "c3" => "yellow"]]; </pre>
+     * => the entire element [a] is replaced by the content of $a2 - the sub-elements 
+     * of $a1 that are not contained in $a2 are lost! <br/><br/>
+     * </li>
+     * <li><b>$a3 = array_merge_recursive($a1, $a2)</b> will result in: <pre>
+     *      $a3 = ["a" => ["c1" => red, "c2" => ["green", "blue"], "c3" => "yellow"]]</pre> 
+     * => [a][c2] changes from string to an array ["green", "blue"]!
+     * </li></ol>
+     * @param array $aBase
+     * @param array $aMerge
+     */
+    protected function mergeArrays(array $aBase, array $aMerge) : array
+    {
+        foreach ($aMerge as $keyMerge => $valueMerge) {
+            if (isset($aBase[$keyMerge]) && is_array($aBase[$keyMerge]) && is_array($valueMerge)) {
+                // The element is available in the basic configuration and both elements contains
+                // an array 
+                // -> call mergeArray () recursively, unless it is a zero index based array in both cases
+                if ($this->isAssoc($aBase[$keyMerge]) || $this->isAssoc($valueMerge)) {
+                    $aBase[$keyMerge] = $this->mergeArrays($aBase[$keyMerge], $valueMerge);
+                    continue;
+                }
+            }
+            // in all other cases either the element from the array that is to be merged is inserted 
+            // or it has priority over the original element
+            $aBase[$keyMerge] = $valueMerge;
+        }
+        return $aBase;
+    }
+ 
+    /**
+     * Check if given array is associative.
+     * Only if the array exactly has sequential numeric keys, starting from 0, the
+     * array is NOT associative. 
+     * @param array $a
+     * @return bool
+     */
+    protected function isAssoc(array $a) : bool
+    {
+        if ($a === []) {
+            return false;
+        }
+        return array_keys($a) !== range(0, count($a) - 1);
     }
 }
