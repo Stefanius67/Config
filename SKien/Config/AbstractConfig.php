@@ -6,12 +6,8 @@ namespace SKien\Config;
 /**
  * Abstract base class for config components.
  *
- * #### History
- * - *2021-01-01*   initial version
- *
- * @package SKien/Config
- * @version 1.0.0
- * @author Stefanius <s.kien@online.de>
+ * @package Config
+ * @author Stefanius <s.kientzler@online.de>
  * @copyright MIT License - see the LICENSE file for details
  */
 abstract class AbstractConfig implements ConfigInterface
@@ -22,11 +18,11 @@ abstract class AbstractConfig implements ConfigInterface
     protected string $strDateFormat = 'Y-m-d';
     /** @var string format for datetime parameters     */
     protected string $strDateTimeFormat = 'Y-m-d H:i';
-    
+
     /**
      * Set the format for date parameters.
-     * See the formatting options DateTime::createFromFormat. 
-     * In most cases, the same letters as for the date() can be used. 
+     * See the formatting options DateTime::createFromFormat.
+     * In most cases, the same letters as for the date() can be used.
      * @param string $strFormat
      * @link https://www.php.net/manual/en/datetime.createfromformat.php
      */
@@ -34,11 +30,11 @@ abstract class AbstractConfig implements ConfigInterface
     {
         $this->strDateFormat = $strFormat;
     }
-    
+
     /**
      * Set the format for datetime parameters.
-     * See the formatting options DateTime::createFromFormat. 
-     * In most cases, the same letters as for the date() can be used. 
+     * See the formatting options DateTime::createFromFormat.
+     * In most cases, the same letters as for the date() can be used.
      * @param string $strFormat
      * @link https://www.php.net/manual/en/datetime.createfromformat.php
      */
@@ -46,7 +42,7 @@ abstract class AbstractConfig implements ConfigInterface
     {
         $this->strDateTimeFormat = $strFormat;
     }
-    
+
     /**
      * Get the value specified by path.
      * @param string $strPath
@@ -68,15 +64,21 @@ abstract class AbstractConfig implements ConfigInterface
                 $value = null;
                 break;
             }
-            $value = $aValues[$aPath[$i]] ?? null;
-            if ($value === null) {
+            if (array_key_exists($aPath[$i], $aValues)) {
+                $value = $aValues[$aPath[$i]];
+                if ($value === null) {
+                    // value exist but is set to null - force to empty string otherwise it would be changed to the default value!
+                    $value = '';
+                }
+            } else {
+                $value = null;
                 break;
             }
             $aValues = $value;
         }
         return $value ?? $default;
     }
-    
+
     /**
      * Get the string value specified by path.
      * @param string $strPath
@@ -87,7 +89,7 @@ abstract class AbstractConfig implements ConfigInterface
     {
         return (string) $this->getValue($strPath, $strDefault);
     }
-    
+
     /**
      * Get the integer value specified by path.
      * @param string $strPath
@@ -98,9 +100,9 @@ abstract class AbstractConfig implements ConfigInterface
     {
         return intval($this->getValue($strPath, $iDefault));
     }
-    
+
     /**
-     * Get the integer value specified by path.
+     * Get the float value specified by path.
      * @param string $strPath
      * @param float $fltDefault
      * @return float
@@ -109,7 +111,7 @@ abstract class AbstractConfig implements ConfigInterface
     {
         return floatval($this->getValue($strPath, $fltDefault));
     }
-    
+
     /**
      * Get the boolean value specified by path.
      * @param string $strPath
@@ -124,7 +126,7 @@ abstract class AbstractConfig implements ConfigInterface
         }
         return $value;
     }
-    
+
     /**
      * Get the date value specified by path.
      * @param string $strPath
@@ -149,7 +151,7 @@ abstract class AbstractConfig implements ConfigInterface
         }
         return $date;
     }
-    
+
     /**
      * Get the date and time value specified by path as unix timestamp.
      * @param string $strPath
@@ -173,7 +175,7 @@ abstract class AbstractConfig implements ConfigInterface
         }
         return $date;
     }
-    
+
     /**
      * Get the array specified by path.
      * @param string $strPath
@@ -183,9 +185,12 @@ abstract class AbstractConfig implements ConfigInterface
     public function getArray(string $strPath, array $aDefault = []) : array
     {
         $value = $this->getValue($strPath, $aDefault);
-        return is_array($value) ? $value : $aDefault;
+
+        // if $value is not an array, the entry exists (otherwise $value = $aDefault, which is an array!),
+        // but only contains a single value! In this case we are return an array containing that single element!
+        return is_array($value) ? $value : [$value];
     }
-    
+
     /**
      * Returns the internal array.
      * @return array
@@ -194,7 +199,7 @@ abstract class AbstractConfig implements ConfigInterface
     {
         return $this->aConfig ?? [];
     }
-    
+
     /**
      * Split the given path in its components.
      * @param string $strPath
@@ -204,7 +209,7 @@ abstract class AbstractConfig implements ConfigInterface
     {
         return explode('.', $strPath);
     }
-    
+
     /**
      * Convert string to bool.
      * Accepted values are (case insensitiv): <ul>
@@ -225,7 +230,7 @@ abstract class AbstractConfig implements ConfigInterface
             return $bDefault;
         }
     }
-    
+
     /**
      * Checks whether the passed value is a valid expression for bool 'True'.
      * Accepted values for bool 'true' are (case insensitiv): <i>true, on, yes, 1</i>
@@ -237,7 +242,7 @@ abstract class AbstractConfig implements ConfigInterface
         $strValue = strtolower($strValue);
         return in_array($strValue, ['true', 'on', 'yes', '1']);
     }
-    
+
     /**
      * Checks whether the passed value is a valid expression for bool 'False'.
      * Accepted values for bool 'false' are (case insensitiv): <i>false, off, no, none, 0</i>
@@ -249,10 +254,10 @@ abstract class AbstractConfig implements ConfigInterface
         $strValue = strtolower($strValue);
         return in_array($strValue, ['false', 'off', 'no', 'none', '0']);
     }
-    
+
     /**
      * Merge this instance with values from onather config.
-     * Note that the elemenst of the config to merge with has allways higher priority than 
+     * Note that the elemenst of the config to merge with has allways higher priority than
      * the elements of this instance. <br/>
      * If both config contains elements with the same key, the value of this instance will be
      * replaced with the value of the config we merge with. <br/>
@@ -268,10 +273,10 @@ abstract class AbstractConfig implements ConfigInterface
         }
         $this->aConfig = $this->mergeArrays($this->aConfig, $aMerge);
     }
-    
+
     /**
      * Merge the values of two array into one resulting array.
-     * <b>Note: <i>neither array_merge() nor array_merge_recursive() lead to 
+     * <b>Note: <i>neither array_merge() nor array_merge_recursive() lead to
      * the desired result</i></b><br/><br/>
      * Assuming following two config:<pre>
      *      $a1 = ["a" => ["c1" => "red", "c2" => "green"]];
@@ -282,11 +287,11 @@ abstract class AbstractConfig implements ConfigInterface
      * But <ol>
      * <li><b>$a3 = array_merge($a1, $a2)</b> will result in: <pre>
      *      $a3 = ["a" => ["c2" => "blue", "c3" => "yellow"]]; </pre>
-     * => the entire element [a] is replaced by the content of $a2 - the sub-elements 
+     * => the entire element [a] is replaced by the content of $a2 - the sub-elements
      * of $a1 that are not contained in $a2 are lost! <br/><br/>
      * </li>
      * <li><b>$a3 = array_merge_recursive($a1, $a2)</b> will result in: <pre>
-     *      $a3 = ["a" => ["c1" => red, "c2" => ["green", "blue"], "c3" => "yellow"]]</pre> 
+     *      $a3 = ["a" => ["c1" => red, "c2" => ["green", "blue"], "c3" => "yellow"]]</pre>
      * => [a][c2] changes from string to an array ["green", "blue"]!
      * </li></ol>
      * @param array $aBase
@@ -297,24 +302,24 @@ abstract class AbstractConfig implements ConfigInterface
         foreach ($aMerge as $keyMerge => $valueMerge) {
             if (isset($aBase[$keyMerge]) && is_array($aBase[$keyMerge]) && is_array($valueMerge)) {
                 // The element is available in the basic configuration and both elements contains
-                // an array 
+                // an array
                 // -> call mergeArray () recursively, unless it is a zero index based array in both cases
                 if ($this->isAssoc($aBase[$keyMerge]) || $this->isAssoc($valueMerge)) {
                     $aBase[$keyMerge] = $this->mergeArrays($aBase[$keyMerge], $valueMerge);
                     continue;
                 }
             }
-            // in all other cases either the element from the array that is to be merged is inserted 
+            // in all other cases either the element from the array that is to be merged is inserted
             // or it has priority over the original element
             $aBase[$keyMerge] = $valueMerge;
         }
         return $aBase;
     }
- 
+
     /**
      * Check if given array is associative.
      * Only if the array exactly has sequential numeric keys, starting from 0, the
-     * array is NOT associative. 
+     * array is NOT associative.
      * @param array $a
      * @return bool
      */
