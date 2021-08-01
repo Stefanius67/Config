@@ -36,10 +36,6 @@ class NEONConfig extends AbstractConfig
         }
 
         $strNeon = file_get_contents($strConfigFile);
-        // PHPStan says 'Variable $aNeon might not be defiend', if this line is missing ...
-        //   -> this is in my point of view correct in the case of Neon::decode() throws the exception! ...
-        // But Scrutinizer marks this line as 'The assignment to $aNeon is dead and can be removed. '
-        $aNeon = [];
         try {
             $aNeon = Neon::decode($strNeon);
             if (!is_array($aNeon)) {
@@ -49,6 +45,6 @@ class NEONConfig extends AbstractConfig
             trigger_error('Invalid config file (' . $strConfigFile . '): ' . $e->getMessage(), E_USER_ERROR);
         }
 
-        return $aNeon;
+        return $aNeon ?? [];
     }
 }
