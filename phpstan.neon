@@ -11,3 +11,5 @@ parameters:
 	checkMissingIterableValueType: false
 	paths:
 		- SKien/Config
+	scanDirectories:
+		- Nette/Neon

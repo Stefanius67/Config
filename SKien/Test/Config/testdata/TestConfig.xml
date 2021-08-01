@@ -3,6 +3,7 @@
 	<Module_1>
 		<String_1>First string Parameter</String_1>
 		<String_2>Second string Parameter</String_2>
+		<EmptyString></EmptyString>
 		<Int_1>10</Int_1>
 		<Int_2>20</Int_2>
 		<Float_1>12.34</Float_1>

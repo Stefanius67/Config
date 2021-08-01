@@ -1,0 +1,25 @@
+---
+BaseString_1: Base String Parameter
+Module_1:
+  String_1: First string Parameter
+  String_2: Second string Parameter
+  EmptyString: 
+  Int_1: 10
+  Int_2: 20
+  Date_1: "2021-01-12"
+  DateTime_1: 2021-02-23 13:47
+Module_2:
+  String_1: Module2 string Parameter
+  Int_1: 30
+  Float_1: 123.45
+  Bool_1: no
+  Bool_Error: invalid
+IndexedArray:
+- First Element
+- Second Element
+- Third Element
+AssocArray:
+  First: Element 1
+  Second: Element 2
+  Third: Element 3
+...

@@ -9,13 +9,13 @@ use SKien\Config\AbstractConfig;
 /**
  * Abstract class providing comprehensive tests for all classes that implement the
  * PNDataProvider Interface.
- * Extending classes have to 
+ * Extending classes have to
  * - create database fixture for whole testclass in the static setUpBeforeClass() method
  * - create an instance of the class in the setUp() method and assign it to the $dp property
  * - implement tests to verify the creation
- * - implement tests for extended functions not supported by PNDataProvider 
+ * - implement tests for extended functions not supported by PNDataProvider
  * - Clean-Up Database after last test in the static tearDownAfterClass() method
- * 
+ *
  * @author Stefanius <s.kien@online.de>
  * @copyright MIT License - see the LICENSE file for details
  */
@@ -28,13 +28,13 @@ abstract class AbstractConfigTest extends TestCase
     {
         // create reflection object to manipulate protected property of AbstractConfig
         $reflectionObject = new \ReflectionObject($cfg);
-        
+
         $reflectionConfig = $reflectionObject->getProperty('aConfig');
         $reflectionConfig->setAccessible(true);
         $reflectionConfig->setValue($cfg, null);
         $this->assertEquals('default', $cfg->getString('BaseString_1', 'default'));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -42,7 +42,15 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals('Base String Parameter', $cfg->getString('BaseString_1'));
     }
-    
+
+    /**
+     * @depends test_construct
+     */
+    public function test_getStringEmpty(AbstractConfig $cfg) : void
+    {
+        $this->assertEquals('', $cfg->getString('Module_1.EmptyString', 'not empty'));
+    }
+
     /**
      * @depends test_construct
      */
@@ -50,7 +58,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals('invalid', $cfg->getString('BaseString_1.Invalid', 'invalid'));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -58,7 +66,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals('default', $cfg->getString('BaseString_X', 'default'));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -66,7 +74,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals(10, $cfg->getInt('Module_1.Int_1'));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -74,7 +82,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals(33, $cfg->getInt('Module_1.Int_X', 33));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -82,7 +90,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals(12.34, $cfg->getFloat('Module_1.Float_1'));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -90,7 +98,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals(56.78, $cfg->getFloat('Module_1.Float_X', 56.78));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -105,7 +113,7 @@ abstract class AbstractConfigTest extends TestCase
         $this->assertEquals(true, $cfg->getBool('Module_2.True_7'));
         $this->assertEquals(true, $cfg->getBool('Module_2.True_8'));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -120,7 +128,7 @@ abstract class AbstractConfigTest extends TestCase
         $this->assertEquals(false, $cfg->getBool('Module_2.False_7'));
         $this->assertEquals(false, $cfg->getBool('Module_2.False_8'));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -129,7 +137,7 @@ abstract class AbstractConfigTest extends TestCase
         $this->assertEquals(false, $cfg->getBool('Module_1.Bool_Invalid', false));
         $this->assertEquals(true, $cfg->getBool('Module_1.Bool_Invalid', true));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -138,7 +146,7 @@ abstract class AbstractConfigTest extends TestCase
         $this->assertEquals(false, $cfg->getBool('Module_1.Bool_X', false));
         $this->assertEquals(true, $cfg->getBool('Module_1.Bool_X', true));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -149,7 +157,7 @@ abstract class AbstractConfigTest extends TestCase
         $cfg->setDateFormat('d.m.Y');
         $this->assertEquals('2012-03-14', date('Y-m-d', $cfg->getDate('Module_1.Date_3')));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -157,7 +165,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals('2021-02-20', date('Y-m-d', $cfg->getDate('Module_1.Date_Invalid', mktime(0, 0, 0, 02, 20, 2021))));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -165,7 +173,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals('2021-02-20', date('Y-m-d', $cfg->getDate('Module_1.Date_X', mktime(0, 0, 0, 02, 20, 2021))));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -176,7 +184,7 @@ abstract class AbstractConfigTest extends TestCase
         $cfg->setDateTimeFormat('d.m.Y H:i');
         $this->assertEquals('2012-03-14 13:47', date('Y-m-d H:i', $cfg->getDateTime('Module_1.DateTime_3')));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -184,7 +192,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals('2021-02-20 16:27', date('Y-m-d H:i', $cfg->getDateTime('Module_1.DateTime_Invalid', mktime(16, 27, 0, 02, 20, 2021))));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -192,7 +200,7 @@ abstract class AbstractConfigTest extends TestCase
     {
         $this->assertEquals('2021-02-20 16:27', date('Y-m-d H:i', $cfg->getDateTime('Module_1.DateTime_X', mktime(16, 27, 0, 02, 20, 2021))));
     }
-    
+
     /**
      * @depends test_construct
      */
@@ -205,7 +213,17 @@ abstract class AbstractConfigTest extends TestCase
         $this->assertEquals('Second Element', $aValues[1]);
         $this->assertEquals('Third Element', $aValues[2]);
     }
-    
+
+    /**
+     * @depends test_construct
+     */
+    public function test_getIndexedArray1(AbstractConfig $cfg) : void
+    {
+        $aValues = $cfg->getArray('BaseString_1');
+        $this->assertIsArray($aValues);
+        $this->assertEquals(1, count($aValues));
+    }
+
     /**
      * @depends test_construct
      */

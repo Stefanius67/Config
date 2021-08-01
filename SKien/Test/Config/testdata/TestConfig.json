@@ -3,6 +3,7 @@
 	"Module_1": {
 		"String_1": "First string Parameter",
 		"String_2": "Second string Parameter",
+		"EmptyString": "",
 		"Int_1": 10,
 		"Int_2": 20,
 		"Float_1": 12.34,
