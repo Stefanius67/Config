@@ -87,6 +87,7 @@ final class Decoder
 	/**
 	 * Decodes a NEON string.
 	 * @return mixed
+	 * @throws Exception
 	 */
 	public function decode(string $input)
 	{

@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Nette\Neon;
 
+use Exception;
+
 
 /**
  * Simple parser & generator for Nette Object Notation.
@@ -35,6 +37,7 @@ final class Neon
 	 * Converts given NEON to PHP value.
 	 * Returns scalars, arrays, DateTimeImmutable and Entity objects.
 	 * @return mixed
+	 * @throws Exception
 	 */
 	public static function decode(string $input)
 	{
