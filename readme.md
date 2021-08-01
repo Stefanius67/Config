@@ -1,12 +1,16 @@
-# Read configuration files of different formats (INI, JSON, XML,...)
+# Read and merge configuration files of different formats
 
- ![Latest Stable Version](https://img.shields.io/badge/release-v1.0.0-brightgreen.svg)
+ ![Latest Stable Version](https://img.shields.io/badge/release-v1.1.0-brightgreen.svg)
  ![License](https://img.shields.io/packagist/l/gomoob/php-pushwoosh.svg) 
  [![Donate](https://img.shields.io/static/v1?label=donate&message=PayPal&color=orange)](https://www.paypal.me/SKientzler/5.00EUR)
  ![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)
  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Stefanius67/Config/badges/quality-score.png?b=main&s=83ec79d99dfd102d2a89d33c72fa55cd93536063)](https://scrutinizer-ci.com/g/Stefanius67/Config/?branch=main)
  
 ----------
+## New in Version 1.1.0
+- Added support for YAML and NEON config files
+- New method `setPathSeparator()` to change default path separator ('.')
+
 ## Overview
 
 This package provides a general interface that grant access to configuration settings 
@@ -17,6 +21,8 @@ of different sources and/or formats.
 - JSON
 - INI (flat INI file like 'usual' windwos INI-Files supporting sections and entries)
 - XML
+- YAML
+- NEON
 - directly from an Array (content may result from a DB query)
 
 In addition, the package offers the possibility of merging several configurations 
@@ -42,5 +48,9 @@ For the format of the configuration files see the seeral examples comming with t
 
 
 ## History
-##### 2021-01-05	Version 1.00
-  * initial Version
+##### 2021-01-05	Version 1.0.0
+- *initial Version*
+
+##### 2021-08-01	Version 1.1.0
+- *Added support for YAML and NEON config files*
+- *New method `setPathSeparator()` to change default path separator ('.')*
