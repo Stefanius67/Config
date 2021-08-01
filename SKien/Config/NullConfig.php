@@ -6,7 +6,7 @@ namespace SKien\Config;
 /**
  * Class for empty config.
  *
- * This class implements  the <b>Null object Design Pattern</b>
+ * This class can be used to implement the <b>Null object Design Pattern</b>
  * (https://designpatternsphp.readthedocs.io/en/latest/Behavioral/NullObject/README.html).
  *
  * All calls to getXXX() allways returns the passed default value.
@@ -20,7 +20,7 @@ namespace SKien\Config;
 class NullConfig extends AbstractConfig
 {
     /**
-     * Allways retun the specified default value.
+     * Allways return the specified default value.
      * @param string $strPath
      * @param mixed $default
      * @return mixed

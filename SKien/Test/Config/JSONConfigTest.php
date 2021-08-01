@@ -43,6 +43,16 @@ class JSONConfigTest extends AbstractConfigTest
         return $cfg;
     }
 
+    public function test_setPathSeparator()
+    {
+        $cfg = new JSONConfig(dirname(__FILE__) . '/testdata/TestConfig.json');
+        $cfg->setPathSeparator('-');
+
+        $this->assertEquals('First string Parameter', $cfg->getString('Module_1-String_1'));
+
+        return $cfg;
+    }
+
     public function test_mergeWith() : void
     {
         $cfg1 = new JSONConfig(dirname(__FILE__) . '/testdata/MergeExample1.json');
