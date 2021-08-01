@@ -14,10 +14,12 @@ abstract class AbstractConfig implements ConfigInterface
 {
     /** @var array holding the config data    */
     protected ?array $aConfig = null;
-    /** @var string format for date parameters     */
+    /** @var string format for date parameters (default: 'Y-m-d')    */
     protected string $strDateFormat = 'Y-m-d';
-    /** @var string format for datetime parameters     */
+    /** @var string format for datetime parameters (default: 'Y-m-d H:i')    */
     protected string $strDateTimeFormat = 'Y-m-d H:i';
+    /** @var string the path separator (default: '.')    */
+    protected string $strSeparator = '.';
 
     /**
      * Set the format for date parameters.
@@ -44,9 +46,24 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
+     * Set the separator character.
+     * Default the '.' is used as separator.
+     * @param string $strSeparator
+     */
+    public function setPathSeparator(string $strSeparator) : void
+    {
+        $this->strSeparator = $strSeparator;
+    }
+
+    /**
      * Get the value specified by path.
-     * @param string $strPath
-     * @param mixed $default
+     * The path addresses a value within the configuration, which can be nested at
+     * any depth (depending on the file format).
+     * The individual levels are specified separated by a separator (default is '.').
+     * The separator can be changed with `setPathSeparator ()`.
+     * @see setPathSeparator()
+     * @param string $strPath   the path to the value.
+     * @param mixed $default    a default value that is returned if entry doesn't exist
      * @return mixed
      */
     public function getValue(string $strPath, $default = null)
@@ -129,11 +146,14 @@ abstract class AbstractConfig implements ConfigInterface
 
     /**
      * Get the date value specified by path.
+     * If the config file contains an integer, it is seen as unix timestamp.
+     * If the config file contains the date as string, it is parsed with the internal
+     * date format set by `setDateFormat()` (default: 'Y-m-d')
      * @param string $strPath
-     * @param mixed $default default value (unix timestamp, DateTime object or date string)
+     * @param int $default default value (unix timestamp)
      * @return int date as unix timestamp
      */
-    public function getDate(string $strPath, $default = 0) : int
+    public function getDate(string $strPath, int $default = 0) : int
     {
         $date = (string) $this->getValue($strPath, $default);
         if (!ctype_digit($date)) {
@@ -154,11 +174,14 @@ abstract class AbstractConfig implements ConfigInterface
 
     /**
      * Get the date and time value specified by path as unix timestamp.
+     * If the config file contains an integer, it is seen as unix timestamp.
+     * If the config file contains the date-time as string, it is parsed with the internal
+     * date format set by `setDateTimeFormat()` (default: 'Y-m-d H:i')
      * @param string $strPath
      * @param int $default default value (unix timestamp)
      * @return int unix timestamp
      */
-    public function getDateTime(string $strPath, $default = 0) : int
+    public function getDateTime(string $strPath, int $default = 0) : int
     {
         $date = (string) $this->getValue($strPath, $default);
         if (!ctype_digit($date)) {
@@ -207,7 +230,7 @@ abstract class AbstractConfig implements ConfigInterface
      */
     protected function splitPath(string $strPath) : array
     {
-        return explode('.', $strPath);
+        return explode($this->strSeparator, $strPath);
     }
 
     /**

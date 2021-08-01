@@ -36,11 +36,10 @@ class NEONConfig extends AbstractConfig
         }
 
         $strNeon = file_get_contents($strConfigFile);
-        $aNeon = [];
         try {
             $aNeon = Neon::decode($strNeon);
             if (!is_array($aNeon)) {
-                trigger_error('Config file (' . $strConfigFile . ') do not contain config informations!', E_USER_ERROR);
+                trigger_error('Config file (' . $strConfigFile . ') does not contain config informations!', E_USER_ERROR);
             }
         } catch (\Exception $e) {
             trigger_error('Invalid config file (' . $strConfigFile . '): ' . $e->getMessage(), E_USER_ERROR);
