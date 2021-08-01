@@ -6,12 +6,8 @@ namespace SKien\Config;
 /**
  * Interface for config components.
  * 
- * #### History
- * - *2021-01-01*   initial version
- * 
- * @package SKien/Config
- * @version 1.0.0
- * @author Stefanius <s.kien@online.de>
+ * @package Config
+ * @author Stefanius <s.kientzler@online.de>
  * @copyright MIT License - see the LICENSE file for details
 */
 interface ConfigInterface

@@ -9,12 +9,8 @@ namespace SKien\Config;
  * The begin of a section have to be set in square brackets.
  * A section is active until next section begins or to the end of file.
  *
- * #### History
- * - *2021-01-01*   initial version
- *
- * @package SKien/Config
- * @version 1.0.0
- * @author Stefanius <s.kien@online.de>
+ * @package Config
+ * @author Stefanius <s.kientzler@online.de>
  * @copyright MIT License - see the LICENSE file for details
  */
 class INIConfig extends AbstractConfig

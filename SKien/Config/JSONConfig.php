@@ -6,12 +6,8 @@ namespace SKien\Config;
 /**
  * Class for config component getting data from JSON file.
  *
- * #### History
- * - *2021-01-01*   initial version
- *
- * @package SKien/Config
- * @version 1.0.0
- * @author Stefanius <s.kien@online.de>
+ * @package Config
+ * @author Stefanius <s.kientzler@online.de>
  * @copyright MIT License - see the LICENSE file for details
  */
 class JSONConfig extends AbstractConfig
@@ -24,7 +20,7 @@ class JSONConfig extends AbstractConfig
     {
         $this->aConfig = $this->parseFile($strConfigFile);
     }
-    
+
     /**
      * Parse the given file an add all settings to the internal configuration.
      * @param string $strConfigFile
@@ -34,7 +30,7 @@ class JSONConfig extends AbstractConfig
         if (!file_exists($strConfigFile)) {
             trigger_error('Config File (' . $strConfigFile . ') does not exist!', E_USER_WARNING);
         }
-        
+
         $strJson = file_get_contents($strConfigFile);
         $aJSON = json_decode($strJson, true);
         if ($aJSON === null) {
