@@ -8,6 +8,6 @@ jobs:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
-        files: ./clover.xml,./coverage.xml
+        files: ./clover.xml
         flags: unittests
         verbose: true
