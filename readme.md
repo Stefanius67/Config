@@ -5,6 +5,7 @@
  [![Donate](https://img.shields.io/static/v1?label=donate&message=PayPal&color=orange)](https://www.paypal.me/SKientzler/5.00EUR)
  ![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)
  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Stefanius67/Config/badges/quality-score.png?b=main&s=83ec79d99dfd102d2a89d33c72fa55cd93536063)](https://scrutinizer-ci.com/g/Stefanius67/Config/?branch=main)
+ [![codecov](https://codecov.io/gh/Stefanius67/Config/branch/main/graph/badge.svg?token=RQS0S0G9KH)](https://codecov.io/gh/Stefanius67/Config)
  
 ----------
 ## New in Version 1.1.0
