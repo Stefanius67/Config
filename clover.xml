@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1628183533">
-  <project timestamp="1628183533">
+<coverage generated="1631897573">
+  <project timestamp="1631897573">
     <package name="SKien\Config">
       <file name="/var/www/html/packages/Config/SKien/Config/AbstractConfig.php">
         <class name="SKien\Config\AbstractConfig" namespace="SKien\Config" fullPackage="Config" package="Config">
-          <metrics complexity="42" methods="19" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="81" coveredstatements="81" elements="100" coveredelements="100"/>
+          <metrics complexity="43" methods="19" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="84" coveredstatements="84" elements="103" coveredelements="103"/>
         </class>
         <line num="31" type="method" name="setDateFormat" visibility="public" complexity="1" crap="1" count="5"/>
         <line num="33" type="stmt" count="5"/>
@@ -12,9 +12,9 @@
         <line num="43" type="method" name="setDateTimeFormat" visibility="public" complexity="1" crap="1" count="5"/>
         <line num="45" type="stmt" count="5"/>
         <line num="46" type="stmt" count="5"/>
-        <line num="53" type="method" name="setPathSeparator" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="55" type="stmt" count="1"/>
-        <line num="56" type="stmt" count="1"/>
+        <line num="53" type="method" name="setPathSeparator" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="55" type="stmt" count="6"/>
+        <line num="56" type="stmt" count="6"/>
         <line num="69" type="method" name="getValue" visibility="public" complexity="6" crap="6" count="115"/>
         <line num="71" type="stmt" count="115"/>
         <line num="73" type="stmt" count="6"/>
@@ -73,40 +73,43 @@
         <line num="214" type="stmt" count="17"/>
         <line num="221" type="method" name="getConfig" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="223" type="stmt" count="2"/>
-        <line num="231" type="method" name="splitPath" visibility="protected" complexity="1" crap="1" count="110"/>
-        <line num="233" type="stmt" count="110"/>
-        <line num="246" type="method" name="boolFromString" visibility="protected" complexity="3" crap="3" count="10"/>
-        <line num="248" type="stmt" count="10"/>
-        <line num="249" type="stmt" count="5"/>
-        <line num="250" type="stmt" count="5"/>
-        <line num="251" type="stmt" count="5"/>
-        <line num="253" type="stmt" count="1"/>
-        <line num="263" type="method" name="isTrue" visibility="protected" complexity="1" crap="1" count="10"/>
-        <line num="265" type="stmt" count="10"/>
-        <line num="266" type="stmt" count="10"/>
-        <line num="275" type="method" name="isFalse" visibility="protected" complexity="1" crap="1" count="5"/>
-        <line num="277" type="stmt" count="5"/>
-        <line num="278" type="stmt" count="5"/>
-        <line num="290" type="method" name="mergeWith" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="292" type="stmt" count="2"/>
-        <line num="293" type="stmt" count="2"/>
-        <line num="294" type="stmt" count="1"/>
-        <line num="295" type="stmt" count="1"/>
-        <line num="297" type="stmt" count="1"/>
+        <line num="231" type="method" name="splitPath" visibility="protected" complexity="2" crap="2" count="120"/>
+        <line num="233" type="stmt" count="120"/>
+        <line num="234" type="stmt" count="120"/>
+        <line num="235" type="stmt" count="5"/>
+        <line num="237" type="stmt" count="120"/>
+        <line num="250" type="method" name="boolFromString" visibility="protected" complexity="3" crap="3" count="10"/>
+        <line num="252" type="stmt" count="10"/>
+        <line num="253" type="stmt" count="5"/>
+        <line num="254" type="stmt" count="5"/>
+        <line num="255" type="stmt" count="5"/>
+        <line num="257" type="stmt" count="1"/>
+        <line num="267" type="method" name="isTrue" visibility="protected" complexity="1" crap="1" count="10"/>
+        <line num="269" type="stmt" count="10"/>
+        <line num="270" type="stmt" count="10"/>
+        <line num="279" type="method" name="isFalse" visibility="protected" complexity="1" crap="1" count="5"/>
+        <line num="281" type="stmt" count="5"/>
+        <line num="282" type="stmt" count="5"/>
+        <line num="294" type="method" name="mergeWith" visibility="public" complexity="2" crap="2" count="2"/>
+        <line num="296" type="stmt" count="2"/>
+        <line num="297" type="stmt" count="2"/>
         <line num="298" type="stmt" count="1"/>
-        <line num="323" type="method" name="mergeArrays" visibility="protected" complexity="7" crap="7" count="1"/>
-        <line num="325" type="stmt" count="1"/>
-        <line num="326" type="stmt" count="1"/>
+        <line num="299" type="stmt" count="1"/>
+        <line num="301" type="stmt" count="1"/>
+        <line num="302" type="stmt" count="1"/>
+        <line num="327" type="method" name="mergeArrays" visibility="protected" complexity="7" crap="7" count="1"/>
+        <line num="329" type="stmt" count="1"/>
         <line num="330" type="stmt" count="1"/>
-        <line num="331" type="stmt" count="1"/>
-        <line num="332" type="stmt" count="1"/>
-        <line num="337" type="stmt" count="1"/>
-        <line num="339" type="stmt" count="1"/>
-        <line num="349" type="method" name="isAssoc" visibility="protected" complexity="2" crap="2" count="1"/>
-        <line num="351" type="stmt" count="1"/>
-        <line num="352" type="stmt" count="1"/>
-        <line num="354" type="stmt" count="1"/>
-        <metrics loc="355" ncloc="207" classes="1" methods="19" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="81" coveredstatements="81" elements="100" coveredelements="100"/>
+        <line num="334" type="stmt" count="1"/>
+        <line num="335" type="stmt" count="1"/>
+        <line num="336" type="stmt" count="1"/>
+        <line num="341" type="stmt" count="1"/>
+        <line num="343" type="stmt" count="1"/>
+        <line num="353" type="method" name="isAssoc" visibility="protected" complexity="2" crap="2" count="1"/>
+        <line num="355" type="stmt" count="1"/>
+        <line num="356" type="stmt" count="1"/>
+        <line num="358" type="stmt" count="1"/>
+        <metrics loc="359" ncloc="211" classes="1" methods="19" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="84" coveredstatements="84" elements="103" coveredelements="103"/>
       </file>
       <file name="/var/www/html/packages/Config/SKien/Config/ArrayConfig.php">
         <class name="SKien\Config\ArrayConfig" namespace="SKien\Config" fullPackage="Config" package="Config">
@@ -140,39 +143,43 @@
       </file>
       <file name="/var/www/html/packages/Config/SKien/Config/JSONConfig.php">
         <class name="SKien\Config\JSONConfig" namespace="SKien\Config" fullPackage="Config" package="Config">
-          <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
+          <metrics complexity="5" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
         </class>
         <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
         <line num="21" type="stmt" count="7"/>
         <line num="22" type="stmt" count="5"/>
-        <line num="28" type="method" name="parseFile" visibility="protected" complexity="3" crap="3" count="7"/>
+        <line num="28" type="method" name="parseFile" visibility="protected" complexity="4" crap="4" count="7"/>
         <line num="30" type="stmt" count="7"/>
         <line num="31" type="stmt" count="1"/>
         <line num="34" type="stmt" count="6"/>
         <line num="35" type="stmt" count="6"/>
         <line num="36" type="stmt" count="6"/>
-        <line num="37" type="stmt" count="1"/>
-        <line num="39" type="stmt" count="5"/>
-        <metrics loc="41" ncloc="29" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
+        <line num="37" type="stmt" count="6"/>
+        <line num="38" type="stmt" count="6"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="42" type="stmt" count="5"/>
+        <metrics loc="44" ncloc="32" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
       </file>
       <file name="/var/www/html/packages/Config/SKien/Config/NEONConfig.php">
         <class name="SKien\Config\NEONConfig" namespace="SKien\Config" fullPackage="Config" package="Config">
-          <metrics complexity="5" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+          <metrics complexity="6" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="15" coveredelements="15"/>
         </class>
         <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
         <line num="25" type="stmt" count="4"/>
         <line num="26" type="stmt" count="2"/>
-        <line num="32" type="method" name="parseFile" visibility="protected" complexity="4" crap="4" count="4"/>
+        <line num="32" type="method" name="parseFile" visibility="protected" complexity="5" crap="5" count="4"/>
         <line num="34" type="stmt" count="4"/>
         <line num="35" type="stmt" count="1"/>
         <line num="38" type="stmt" count="3"/>
+        <line num="39" type="stmt" count="3"/>
         <line num="40" type="stmt" count="3"/>
-        <line num="41" type="stmt" count="2"/>
-        <line num="42" type="stmt" count="2"/>
-        <line num="44" type="stmt" count="1"/>
-        <line num="45" type="stmt" count="1"/>
-        <line num="48" type="stmt" count="2"/>
-        <metrics loc="50" ncloc="36" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+        <line num="42" type="stmt" count="3"/>
+        <line num="43" type="stmt" count="2"/>
+        <line num="44" type="stmt" count="2"/>
+        <line num="46" type="stmt" count="1"/>
+        <line num="47" type="stmt" count="1"/>
+        <line num="50" type="stmt" count="2"/>
+        <metrics loc="52" ncloc="38" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="15" coveredelements="15"/>
       </file>
       <file name="/var/www/html/packages/Config/SKien/Config/NullConfig.php">
         <class name="SKien\Config\NullConfig" namespace="SKien\Config" fullPackage="Config" package="Config">
@@ -184,12 +191,12 @@
       </file>
       <file name="/var/www/html/packages/Config/SKien/Config/XMLConfig.php">
         <class name="SKien\Config\XMLConfig" namespace="SKien\Config" fullPackage="Config" package="Config">
-          <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="14" coveredelements="14"/>
+          <metrics complexity="5" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="15" coveredelements="15"/>
         </class>
         <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
         <line num="21" type="stmt" count="4"/>
         <line num="22" type="stmt" count="2"/>
-        <line num="28" type="method" name="parseFile" visibility="protected" complexity="3" crap="3" count="4"/>
+        <line num="28" type="method" name="parseFile" visibility="protected" complexity="4" crap="4" count="4"/>
         <line num="30" type="stmt" count="4"/>
         <line num="31" type="stmt" count="1"/>
         <line num="37" type="stmt" count="3"/>
@@ -197,32 +204,35 @@
         <line num="40" type="stmt" count="2"/>
         <line num="45" type="stmt" count="2"/>
         <line num="46" type="stmt" count="2"/>
-        <line num="47" type="stmt" count="1"/>
-        <line num="48" type="stmt" count="1"/>
-        <line num="51" type="stmt" count="2"/>
-        <metrics loc="53" ncloc="34" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="14" coveredelements="14"/>
+        <line num="47" type="stmt" count="2"/>
+        <line num="49" type="stmt" count="1"/>
+        <line num="50" type="stmt" count="1"/>
+        <line num="53" type="stmt" count="2"/>
+        <metrics loc="55" ncloc="36" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="15" coveredelements="15"/>
       </file>
       <file name="/var/www/html/packages/Config/SKien/Config/YAMLConfig.php">
         <class name="SKien\Config\YAMLConfig" namespace="SKien\Config" fullPackage="Config" package="Config">
-          <metrics complexity="5" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
+          <metrics complexity="6" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
         </class>
         <line num="21" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="4"/>
         <line num="23" type="stmt" count="4"/>
         <line num="27" type="stmt" count="4"/>
         <line num="29" type="stmt" count="2"/>
-        <line num="35" type="method" name="parseFile" visibility="protected" complexity="3" crap="3" count="4"/>
+        <line num="35" type="method" name="parseFile" visibility="protected" complexity="4" crap="4" count="4"/>
         <line num="37" type="stmt" count="4"/>
         <line num="38" type="stmt" count="1"/>
         <line num="41" type="stmt" count="3"/>
         <line num="42" type="stmt" count="3"/>
-        <line num="43" type="stmt" count="2"/>
-        <line num="48" type="stmt" count="2"/>
-        <metrics loc="50" ncloc="34" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
+        <line num="43" type="stmt" count="3"/>
+        <line num="44" type="stmt" count="3"/>
+        <line num="45" type="stmt" count="2"/>
+        <line num="51" type="stmt" count="2"/>
+        <metrics loc="53" ncloc="37" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
       </file>
     </package>
     <file name="/var/www/html/packages/Config/SKien/Config/ConfigInterface.php">
       <metrics loc="78" ncloc="32" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="9" loc="748" ncloc="437" classes="8" methods="33" coveredmethods="33" conditionals="0" coveredconditionals="0" statements="136" coveredstatements="136" elements="169" coveredelements="169"/>
+    <metrics files="9" loc="762" ncloc="451" classes="8" methods="33" coveredmethods="33" conditionals="0" coveredconditionals="0" statements="146" coveredstatements="146" elements="179" coveredelements="179"/>
   </project>
 </coverage>

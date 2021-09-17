@@ -236,5 +236,43 @@ abstract class AbstractConfigTest extends TestCase
         $this->assertEquals('Element 2', $aValues['Second']);
         $this->assertEquals('Element 3', $aValues['Third']);
     }
+
+    /**
+     * @depends test_construct
+     */
+    public function test_splitPath(AbstractConfig $cfg) : void
+    {
+        $rflMethod = $this->getProtectedMethod('splitPath', $cfg);
+        $aTest = $rflMethod->invokeArgs($cfg, ['first.second']);
+        $this->assertIsArray($aTest);
+        $this->assertEquals(2, count($aTest));
+    }
+
+    /**
+     * @depends test_construct
+     */
+    public function test_splitPathInvalid(AbstractConfig $cfg) : void
+    {
+        $cfg->setPathSeparator('');
+        $rflMethod = $this->getProtectedMethod('splitPath', $cfg);
+        // disable error_reporting() because set empty separator will cause
+        // a PHP warning that would stop the execution of the testcode...
+        $iLevel = error_reporting(0);
+        $aTest = $rflMethod->invokeArgs($cfg, ['first.second']);
+        error_reporting($iLevel);
+        $this->assertIsArray($aTest);
+        $this->assertEquals(1, count($aTest));
+    }
+
+    protected function getProtectedMethod(string $strMethod, AbstractConfig $cfg) : \ReflectionMethod
+    {
+        // create reflection object to call protected method of JsonLD
+        $rflObject = new \ReflectionObject($cfg);
+
+        $rflMethod = $rflObject->getMethod($strMethod);
+        $rflMethod->setAccessible(true);
+
+        return $rflMethod;
+    }
 }
 

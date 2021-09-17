@@ -39,10 +39,13 @@ class YAMLConfig extends AbstractConfig
         }
 
         $strYaml = file_get_contents($strConfigFile);
-        $aYAML = yaml_parse($strYaml);
-        if ($aYAML === false) {
-            // no codecoverage: haven't found example to test for returnvalue of false
-            trigger_error('Invalid config file (' . $strConfigFile . ')', E_USER_ERROR); // @codeCoverageIgnore
+        $aYAML = [];
+        if ($strYaml !== false) {
+            $aYAML = yaml_parse($strYaml);
+            if ($aYAML === false) {
+                // no codecoverage: haven't found example to test for returnvalue of false
+                trigger_error('Invalid config file (' . $strConfigFile . ')', E_USER_ERROR); // @codeCoverageIgnore
+            }
         }
 
         return $aYAML;

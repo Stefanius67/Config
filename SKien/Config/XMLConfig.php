@@ -42,8 +42,10 @@ class XMLConfig extends AbstractConfig
             // 2. json_encode() converts an empty SimpleXMLElement to '{}'
             // 3. json_decode() converts '{}' to an empty array :-(
             // -> to prevent this, we replace all '{}' with an empty string '""' before decoding!
-            $strJSON = str_replace('{}', '""', $strJSON);
-            $aXML = json_decode($strJSON, true);
+            if ($strJSON !== false) {
+                $strJSON = str_replace('{}', '""', $strJSON);
+                $aXML = json_decode($strJSON, true);
+            }
         } catch (\Exception $e) {
             trigger_error('Invalid config file (' . $strConfigFile . '): ' . $e->getMessage(), E_USER_ERROR);
         }

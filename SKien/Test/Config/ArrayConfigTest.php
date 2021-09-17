@@ -17,7 +17,7 @@ class ArrayConfigTest extends TestCase
         $cfg = new ArrayConfig();
         $this->assertIsObject($cfg);
     }
-    
+
     public function test_addConfig() : void
     {
         $cfg = $this->createConfig();
@@ -34,7 +34,7 @@ class ArrayConfigTest extends TestCase
         $this->assertEquals('Modified First string Parameter', $cfg->getString('Module_1.String_1', 'default'));
         $this->assertEquals('default', $cfg->getString('Module_1.String_2', 'default'));
     }
-    
+
     public function test_setValue() : void
     {
         $cfg = $this->createConfig();
@@ -44,7 +44,7 @@ class ArrayConfigTest extends TestCase
         $this->assertEquals('Changed string Parameter', $cfg->getString('BaseString_1', 'default'));
         $this->assertEquals('Additional string Parameter', $cfg->getString('BaseString_2', 'default'));
     }
-    
+
     protected function createConfig() : ArrayConfig
     {
         $cfg = new ArrayConfig([

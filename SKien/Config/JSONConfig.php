@@ -31,11 +31,14 @@ class JSONConfig extends AbstractConfig
             trigger_error('Config File (' . $strConfigFile . ') does not exist!', E_USER_WARNING);
         }
 
+        $aJSON = null;
         $strJson = file_get_contents($strConfigFile);
-        $aJSON = json_decode($strJson, true);
-        if ($aJSON === null) {
-            trigger_error('Invalid config file (' . $strConfigFile . '): ' . json_last_error_msg(), E_USER_ERROR);
+        if ($strJson !== false) {
+            $aJSON = json_decode($strJson, true);
+            if ($aJSON === null) {
+                trigger_error('Invalid config file (' . $strConfigFile . '): ' . json_last_error_msg(), E_USER_ERROR);
+            }
         }
-        return $aJSON;
+        return $aJSON ?? [];
     }
 }

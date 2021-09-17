@@ -230,7 +230,11 @@ abstract class AbstractConfig implements ConfigInterface
      */
     protected function splitPath(string $strPath) : array
     {
-        return explode($this->strSeparator, $strPath);
+        $aSplit = explode($this->strSeparator, $strPath);
+        if ($aSplit === false) {
+            $aSplit = [$strPath];
+        }
+        return $aSplit;
     }
 
     /**

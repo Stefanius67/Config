@@ -35,16 +35,18 @@ class NEONConfig extends AbstractConfig
             trigger_error('Config File (' . $strConfigFile . ') does not exist!', E_USER_WARNING);
         }
 
+        $aNeon = null;
         $strNeon = file_get_contents($strConfigFile);
-        try {
-            $aNeon = Neon::decode($strNeon);
-            if (!is_array($aNeon)) {
-                trigger_error('Config file (' . $strConfigFile . ') does not contain config informations!', E_USER_ERROR);
+        if ($strNeon !== false) {
+            try {
+                $aNeon = Neon::decode($strNeon);
+                if (!is_array($aNeon)) {
+                    trigger_error('Config file (' . $strConfigFile . ') does not contain config informations!', E_USER_ERROR);
+                }
+            } catch (\Exception $e) {
+                trigger_error('Invalid config file (' . $strConfigFile . '): ' . $e->getMessage(), E_USER_ERROR);
             }
-        } catch (\Exception $e) {
-            trigger_error('Invalid config file (' . $strConfigFile . '): ' . $e->getMessage(), E_USER_ERROR);
         }
-
         return $aNeon ?? [];
     }
 }
