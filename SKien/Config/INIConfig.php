@@ -23,10 +23,11 @@ class INIConfig extends AbstractConfig
     {
         $this->aConfig = $this->parseFile($strConfigFile);
     }
-    
+
     /**
-     * Parse the given file an add all settings to the internal configuration. 
+     * Parse the given file an add all settings to the internal configuration.
      * @param string $strConfigFile
+     * @return array<mixed>
      */
     protected function parseFile(string $strConfigFile) : array
     {

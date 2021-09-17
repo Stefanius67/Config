@@ -15,7 +15,7 @@ class ArrayConfig extends AbstractConfig
     /**
      * The array containing configuartion data can directly be passed to the constructor.
      * Additional data can be passed with the `setValue()` and `addConfig()` methods.
-     * @param array $aConfig    associative array
+     * @param array<mixed> $aConfig    associative array
      */
     public function __construct(array $aConfig = [])
     {
@@ -29,7 +29,7 @@ class ArrayConfig extends AbstractConfig
      * contains, the complete section is overwritten! <br/>
      * If you want to 'realy' merge two configurations, you have to use separate
      * instances and use the mergeWith() method!
-     * @param array $aConfig    associative array
+     * @param array<mixed> $aConfig    associative array
      */
     public function addConfig(array $aConfig) : void
     {
