@@ -3,7 +3,7 @@
     <title>Config</title>
 	<options>
 		<verbose>true</verbose>
-		<debug>false</debug>
+		<debug>true</debug>
 		<norun>false</norun>
 	</options>
 	
